@@ -1,7 +1,15 @@
 import path from 'path'
+import clearTestTmpAssets from '../../../helper/clearTestTmpAssets'
 import PngToJpg from '../../../convert/PngToJpg'
 
 describe('png to jpg', () => {
+  afterEach((done) => {
+    clearTestTmpAssets().fork(
+      (err) => console.error(err),
+      () => done()
+    )
+  })
+
   it('should create correct file when png is given', (done) => {
     PngToJpg(
       path.join(__dirname, '../../assets/png-test.png'),
@@ -13,7 +21,6 @@ describe('png to jpg', () => {
   })
 
   it('should not create correct file when txt is given', (done) => {
-    console.log('testing file should not create')
     PngToJpg(
       path.join(__dirname, '../../assets/random-text.txt'),
       path.join(__dirname, '../../assets/tmp/png-test.jpg')

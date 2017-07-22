@@ -48,7 +48,6 @@ export const getTmpFiles = (tmpFolder) => {
 
 export const getTmpFolder = () => {
   return new Future((rej, res) => {
-    console.log('getting tmp folder path!!')
     return res(path.join(__dirname, '../tests/assets/tmp'))
   })
 }
