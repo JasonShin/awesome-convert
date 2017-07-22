@@ -7,15 +7,22 @@ const Future = fantasy.Future
 
 /**
  * Converts png to jpg
+ * Supported:
+ * 1) file system src -> dest conversion
  * @param src: path to source
  * @param dest: path to dest
+ * @param quality: quality of converted image
  * @returns {*}
  */
-const handler = (src, dest) => {
+const handler = ({
+  src,
+  dest,
+  quality = 90,
+}) => {
   return new Future((rej, res) => {
     const buffer = fs.readFileSync(src)
     try {
-      pngToJpg({ quality: 90 })(buffer)
+      pngToJpg({ quality })(buffer)
         .then(output => {
           if (!dest) {
             return res(output)
@@ -25,7 +32,6 @@ const handler = (src, dest) => {
           }
         })
     } catch (e) {
-      console.log('failed to create png to jpg!')
       return rej(e)
     }
 
