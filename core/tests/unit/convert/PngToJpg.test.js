@@ -3,21 +3,19 @@ import clearTestTmpAssets from '../../../helper/clearTestTmpAssets'
 import PngToJpg from '../../../convert/PngToJpg'
 
 describe('#PngToJpg', () => {
-  afterEach((done) => {
+  /* afterEach((done) => {
     clearTestTmpAssets().fork(
       (err) => console.error(err),
       () => done()
     )
-  })
+  }) */
 
   it('should create correct file when png is given', (done) => {
     PngToJpg({
       src: path.join(__dirname, '../../assets/png-test.png'),
       dest: path.join(__dirname, '../../assets/tmp/png-test.jpg')
     })
-      .fork(console.error, (res) => {
-        done()
-      })
+      .fork(console.error, (res) => done())
   })
 
   it('should not convert when txt is given', (done) => {
@@ -31,17 +29,6 @@ describe('#PngToJpg', () => {
       )
   })
 
-  it('should accept custom image conversion quality: 100', (done) => {
-    PngToJpg({
-      src: path.join(__dirname, '../../assets/png-test.png'),
-      dest: path.join(__dirname, '../../assets/tmp/png-test.jpg'),
-      quality: 100,
-    })
-      .fork(
-        () => console.error('It could not convert to jpg in 100% quality'),
-        () => done(),
-      )
-  })
   it('should accept custom image conversion quality: 10', (done) => {
     PngToJpg({
       src: path.join(__dirname, '../../assets/png-test.png'),
@@ -98,6 +85,18 @@ describe('#PngToJpg', () => {
     })
       .fork(
         () => console.error('It could not convert to jpg in 40% quality'),
+        () => done(),
+      )
+  })
+
+  it('should accept custom image conversion quality: 100', (done) => {
+    PngToJpg({
+      src: path.join(__dirname, '../../assets/png-test.png'),
+      dest: path.join(__dirname, '../../assets/tmp/png-test.jpg'),
+      quality: 100,
+    })
+      .fork(
+        () => console.error('It could not convert to jpg in 100% quality'),
         () => done(),
       )
   })

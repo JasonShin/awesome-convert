@@ -29,6 +29,7 @@
   },
   "dependencies": {
     "cross-env": "^5.0.1",
+    "gm": "^1.23.0",
     "png-to-jpeg": "^1.0.1",
     "ramda": "^0.24.1",
     "ramda-fantasy": "^0.8.0"
