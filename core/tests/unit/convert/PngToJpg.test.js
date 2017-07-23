@@ -18,17 +18,6 @@ describe('#PngToJpg - ImageConverter', () => {
       .fork(console.error, (res) => done())
   })
 
-  it('should not convert when txt is given', (done) => {
-    ImageConverter({
-      src: path.join(__dirname, '../../assets/random-text.txt'),
-      dest: path.join(__dirname, '../../assets/tmp/png-test.jpg')
-    })
-      .fork(
-        () => console.error('It should not create txt as jpg !'),
-        () => done(),
-      )
-  })
-
   it('should accept custom image conversion quality: 10', (done) => {
     ImageConverter({
       src: path.join(__dirname, '../../assets/png-test.png'),
