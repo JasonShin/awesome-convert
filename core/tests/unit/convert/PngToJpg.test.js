@@ -1,17 +1,17 @@
 import path from 'path'
 import clearTestTmpAssets from '../../../helper/clearTestTmpAssets'
-import PngToJpg from '../../../convert/PngToJpg'
+import ImageConverter from '../../../convert/ImageConverter'
 
-describe('#PngToJpg', () => {
-  /* afterEach((done) => {
+describe('#PngToJpg - ImageConverter', () => {
+  afterEach((done) => {
     clearTestTmpAssets().fork(
       (err) => console.error(err),
       () => done()
     )
-  }) */
+  })
 
   it('should create correct file when png is given', (done) => {
-    PngToJpg({
+    ImageConverter({
       src: path.join(__dirname, '../../assets/png-test.png'),
       dest: path.join(__dirname, '../../assets/tmp/png-test.jpg')
     })
@@ -19,18 +19,18 @@ describe('#PngToJpg', () => {
   })
 
   it('should not convert when txt is given', (done) => {
-    PngToJpg({
+    ImageConverter({
       src: path.join(__dirname, '../../assets/random-text.txt'),
       dest: path.join(__dirname, '../../assets/tmp/png-test.jpg')
     })
       .fork(
+        () => console.error('It should not create txt as jpg !'),
         () => done(),
-        () => console.error('It should not create txt as jpg !')
       )
   })
 
   it('should accept custom image conversion quality: 10', (done) => {
-    PngToJpg({
+    ImageConverter({
       src: path.join(__dirname, '../../assets/png-test.png'),
       dest: path.join(__dirname, '../../assets/tmp/png-test.jpg'),
       quality: 10,
@@ -42,7 +42,7 @@ describe('#PngToJpg', () => {
   })
 
   it('should accept custom image conversion quality: 20', (done) => {
-    PngToJpg({
+    ImageConverter({
       src: path.join(__dirname, '../../assets/png-test.png'),
       dest: path.join(__dirname, '../../assets/tmp/png-test.jpg'),
       quality: 20,
@@ -54,7 +54,7 @@ describe('#PngToJpg', () => {
   })
 
   it('should accept custom image conversion quality: 30', (done) => {
-    PngToJpg({
+    ImageConverter({
       src: path.join(__dirname, '../../assets/png-test.png'),
       dest: path.join(__dirname, '../../assets/tmp/png-test.jpg'),
       quality: 30,
@@ -66,7 +66,7 @@ describe('#PngToJpg', () => {
   })
 
   it('should accept custom image conversion quality: 40', (done) => {
-    PngToJpg({
+    ImageConverter({
       src: path.join(__dirname, '../../assets/png-test.png'),
       dest: path.join(__dirname, '../../assets/tmp/png-test.jpg'),
       quality: 40,
@@ -78,7 +78,7 @@ describe('#PngToJpg', () => {
   })
 
   it('should accept custom image conversion quality: 50', (done) => {
-    PngToJpg({
+    ImageConverter({
       src: path.join(__dirname, '../../assets/png-test.png'),
       dest: path.join(__dirname, '../../assets/tmp/png-test.jpg'),
       quality: 50,
@@ -90,7 +90,7 @@ describe('#PngToJpg', () => {
   })
 
   it('should accept custom image conversion quality: 100', (done) => {
-    PngToJpg({
+    ImageConverter({
       src: path.join(__dirname, '../../assets/png-test.png'),
       dest: path.join(__dirname, '../../assets/tmp/png-test.jpg'),
       quality: 100,

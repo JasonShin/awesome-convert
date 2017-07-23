@@ -1,9 +1,9 @@
 import path from 'path'
-import JpgToPng from '../../../convert/JpgToPng'
+import ImageConverter from '../../../convert/ImageConverter'
 
-describe('#PngToJpg', () => {
+describe('#JpgToPng - ImageConverter', () => {
   it('should create correct file when png is given', (done) => {
-    JpgToPng({
+    ImageConverter({
       src: path.join(__dirname, '../../assets/jpg-test.jpg'),
       dest: path.join(__dirname, '../../assets/tmp/jpg-test.png')
     })
