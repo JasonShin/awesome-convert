@@ -2,7 +2,7 @@ import path from 'path'
 import clearTestTmpAssets from '../../../helper/clearTestTmpAssets'
 import ImageConverter from '../../../convert/ImageConverter'
 
-describe('#TxtToJpg', () => {
+describe('#PngToIco', () => {
   /* afterEach((done) => {
    clearTestTmpAssets().fork(
    (err) => console.error(err),
