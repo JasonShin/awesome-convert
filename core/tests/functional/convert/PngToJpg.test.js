@@ -3,12 +3,12 @@ import clearTestTmpAssets from '../../../helper/clearTestTmpAssets'
 import ImageConverter from '../../../convert/ImageConverter'
 
 describe('#PngToJpg - ImageConverter', () => {
-  afterEach((done) => {
+  /* afterEach((done) => {
     clearTestTmpAssets().fork(
       (err) => console.error(err),
       () => done()
     )
-  })
+  }) */
 
   it('should create correct file when png is given', (done) => {
     ImageConverter({
