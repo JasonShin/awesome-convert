@@ -9,13 +9,13 @@ describe('#PngToIco', () => {
    () => done()
    )
    }) */
-  it('Should convert txt to tiff', (done) => {
+  it('Should convert png to ico test', (done) => {
     ImageConverter({
-      src: path.join(__dirname, '../../assets/random-text.txt'),
-      dest: path.join(__dirname, '../../assets/tmp/png-test.tiff')
+      src: path.join(__dirname, '../../assets/home-icon.png'),
+      dest: path.join(__dirname, '../../assets/tmp/home-icon.ico')
     })
       .fork(
-        () => console.error('Failed to convert txt to tiff'),
+        (e) => console.error('Failed to convert png to ico ', e),
         () => done(),
       )
   })
