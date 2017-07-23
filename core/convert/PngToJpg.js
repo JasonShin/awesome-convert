@@ -1,6 +1,6 @@
-import R from 'ramda'
 import fantasy from 'ramda-fantasy'
 import fs from 'fs'
+import gm from 'gm'
 import pngToJpg from 'png-to-jpeg'
 
 const Future = fantasy.Future
