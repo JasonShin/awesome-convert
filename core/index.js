@@ -6,5 +6,5 @@ const test = () => {
   console.log('tesat asaaazzzs zzasd ', testPath)
 }
 
-console.log('testing mate')
+console.log('testing matezz')
 test()
