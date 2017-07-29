@@ -22,7 +22,6 @@ webpackConfig.entry.client = [
   webpackConfig.entry.client
 ]
 
-console.log('before pushing any configs to webpack ', host, '  ', port)
 webpackConfig.plugins.push(new LogPlugin({ host, port }))
 
 let compiler
