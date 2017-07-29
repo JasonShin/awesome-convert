@@ -1,47 +1,46 @@
 {
   "name": "awesome-convert",
-  "version": "1.0.0",
-  "description": "Convert file formats just by drag and drop!",
-  "main": "index.js",
+  "version": "0.1.0",
+  "description": "My Superb Vue Project",
+  "main": "client/index.js",
   "scripts": {
-    "dev:server": "babel-watch core/index.js",
-    "dev:client": "node client/build/server.js",
+    "test": "",
     "build": "webpack --config build/webpack.prod.js",
-    "lint": "xo **/client/**/*.{vue,js} !node_modules/**",
-    "test:all": "cross-env NODE_ENV=test mocha --compilers js:babel-core/register --recursive \"core/tests/\""
+    "dev": "node build/server.js",
+    "lint": "xo **/client/**/*.{vue,js} !node_modules/**"
   },
-  "keywords": [
-    "convert",
-    "opensource",
-    "pdf",
-    "jpg",
-    "png",
-    "html",
-    "md"
-  ],
-  "author": "Jason Shin",
+  "author": "Jason Shin <visualbbasic@gmail.com>",
   "license": "MIT",
-  "devDependencies": {
+  "xo": {
+    "extends": "./.eslintrc",
+    "esnext": true,
+    "envs": [
+      "browser"
+    ]
+  },
+  "babel": {
+    "presets": [
+      ["vue-app", {
+        "useBuiltIns": true
+      }]
+    ]
+  },
+  "postcss": {
+    "plugins": {
+      "autoprefixer": {},
+      "postcss-nested": {}
+    }
+  },
+  "browserslist": ["last 2 versions", "ie > 8"],
+  "dependencies": {
     "babel-runtime": "^6.18.0",
     "promise-polyfill": "^6.0.2",
     "vue": "^2.2.0",
     "vue-router": "^2.0.0",
     "vuex": "^2.0.0",
-    "vuex-router-sync": "^4.0.0",
-    "babel-cli": "^6.24.1",
-    "babel-preset-es2015": "^6.24.1",
-    "babel-preset-es2016": "^6.24.1",
-    "babel-preset-es2017": "^6.24.1",
-    "babel-preset-stage-0": "^6.24.1",
-    "babel-watch": "^2.0.7",
-    "mocha": "^3.4.2"
+    "vuex-router-sync": "^4.0.0"
   },
-  "dependencies": {
-    "cross-env": "^5.0.1",
-    "gm": "^1.23.0",
-    "png-to-jpeg": "^1.0.1",
-    "ramda": "^0.24.1",
-    "ramda-fantasy": "^0.8.0",
+  "devDependencies": {
     "autoprefixer": "^6.4.0",
     "babel-core": "^6.16.0",
     "babel-loader": "^6.2.4",
@@ -49,6 +48,7 @@
     "chalk": "^1.1.3",
     "copy-webpack-plugin": "^4.0.1",
     "css-loader": "^0.23.1",
+    "cross-env": "^2.0.0",
     "xo": "^0.18.0",
     "eslint-config-vue": "latest",
     "eslint-plugin-vue": "latest",
