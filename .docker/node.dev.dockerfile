@@ -10,9 +10,9 @@ WORKDIR $CORE
 RUN apt-get update -y
 RUN apt-get install -y \
     graphicsmagick \
-    imagemagick
+    imagemagick > /dev/null
 
-RUN npm install -g html-pdf babel-watch
+RUN npm install -g html-pdf babel-watch > /dev/null
 
 # Install packages without NPM trick
 COPY package.json $CORE
