@@ -3,16 +3,16 @@ version: '2'
 services:
   awesome-convert:
     image: awesome-convert
-    container_name: awesome-convert-test-server
-    command: yarn test:all
+    container_name: awesome-convert-dev-server
     environment:
       NODE_ENV: development
       SERVER_URL: localhost
     build:
       context: .
-      dockerfile: ./node.dev.dockerfile
+      dockerfile: .docker/node.dev.dockerfile
     volumes:
-      - ../:/home/node/app
+      - .:/home/node/app
       - /home/node/app/node_modules
     ports:
-      - "3000:4000"
+      - "3001:4001"
+      - "5858:5858"

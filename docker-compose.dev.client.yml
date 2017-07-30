@@ -10,9 +10,9 @@ services:
       SERVER_URL: localhost
     build:
       context: .
-      dockerfile: ./node.dev.dockerfile
+      dockerfile: .docker/node.dev.dockerfile
     volumes:
-      - ../:/home/node/app
+      - .:/home/node/app
       - /home/node/app/node_modules
     ports:
       - "3000:4000"
