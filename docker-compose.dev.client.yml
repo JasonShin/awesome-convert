@@ -2,14 +2,15 @@ version: '2'
 
 services:
   awesome-convert:
-    image: client
+    image: awesome-convert
     container_name: awesome-convert-dev-client
+    command: yarn dev:client
     environment:
       NODE_ENV: development
       SERVER_URL: localhost
     build:
       context: .
-      dockerfile: .docker/node.dev.client.dockerfile
+      dockerfile: .docker/node.dev.dockerfile
     volumes:
       - .:/home/node/app
       - /home/node/app/node_modules

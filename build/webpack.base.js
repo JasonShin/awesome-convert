@@ -6,7 +6,6 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const config = require('./config');
 const _ = require('./utils');
 
-console.log('checking path for index.html ', path.resolve(__dirname, 'index.html'));
 module.exports = {
 	entry: {
 		client: path.resolve(__dirname, '../client/index.js')

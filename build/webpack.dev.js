@@ -8,12 +8,12 @@ const FriendlyErrors = require('friendly-errors-webpack-plugin');
 
 base.devtool = 'eval-source-map';
 base.plugins.push(
-  new webpack.DefinePlugin({
-	'process.env.NODE_ENV': JSON.stringify('development')
-}),
+	new webpack.DefinePlugin({
+		'process.env.NODE_ENV': JSON.stringify('development')
+	}),
   new webpack.HotModuleReplacementPlugin(),
-  new webpack.NoEmitOnErrorsPlugin(),
-  new FriendlyErrors()
+  new webpack.NoEmitOnErrorsPlugin()
+  //new FriendlyErrors()
 );
 
 // Push loader for css files

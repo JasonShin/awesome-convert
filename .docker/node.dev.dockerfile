@@ -6,6 +6,7 @@ RUN mkdir $CORE
 RUN echo $CORE
 WORKDIR $CORE
 
+# Install required packages
 RUN apt-get update -y
 RUN apt-get install -y \
     graphicsmagick \
