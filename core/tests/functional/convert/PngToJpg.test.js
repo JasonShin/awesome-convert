@@ -3,12 +3,12 @@ import clearTestTmpAssets from '../../../helper/clearTestTmpAssets';
 import ImageConverter from '../../../convert/ImageMagick';
 
 describe('#PngToJpg - ImageConverter', () => {
-  /* AfterEach((done) => {
+  afterEach((done) => {
     clearTestTmpAssets().fork(
       (err) => console.error(err),
       () => done()
     )
-  }) */
+  })
 
 	it('should create correct file when png is given', done => {
 		ImageConverter.convert({
@@ -27,8 +27,8 @@ describe('#PngToJpg - ImageConverter', () => {
       .fork(
         () => console.error('It could not convert to jpg in 10% quality'),
         () => done(),
-      );
-	});
+      )
+	})
 
 	it('should accept custom image conversion quality: 20', done => {
 		ImageConverter.convert({

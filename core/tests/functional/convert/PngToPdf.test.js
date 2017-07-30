@@ -3,12 +3,12 @@ import clearTestTmpAssets from '../../../helper/clearTestTmpAssets'
 import ImageConverter from '../../../convert/ImageMagick'
 
 describe('#PngToPdf', () => {
-  /* AfterEach((done) => {
-   clearTestTmpAssets().fork(
-   (err) => console.error(err),
-   () => done()
-   )
-   }) */
+  afterEach((done) => {
+    clearTestTmpAssets().fork(
+      (err) => console.error(err),
+      () => done()
+    )
+  })
   it('Should convert png to pdf', done => {
     ImageConverter.convert({
       src: path.join(__dirname, '../../assets/png-test.png'),

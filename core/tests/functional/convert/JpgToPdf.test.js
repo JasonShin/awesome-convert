@@ -3,12 +3,12 @@ import clearTestTmpAssets from '../../../helper/clearTestTmpAssets';
 import ImageMagick from '../../../convert/ImageMagick';
 
 describe('#JpgToPdf', () => {
-  /* AfterEach((done) => {
-   clearTestTmpAssets().fork(
-   (err) => console.error(err),
-   () => done()
-   )
-   }) */
+  afterEach((done) => {
+    clearTestTmpAssets().fork(
+      (err) => console.error(err),
+      () => done()
+    )
+  })
 	it('Should convert txt to tiff', done => {
 		ImageMagick.convert({
 			src: path.join(__dirname, '../../assets/jpg-test.jpg'),

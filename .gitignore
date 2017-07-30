@@ -1,7 +1,5 @@
 /node_modules
 .idea
-core/tests/assets/tmp/
-!core/tests/assets/tmp/.placeholder
 *.log
 .DS_Store
 /dist

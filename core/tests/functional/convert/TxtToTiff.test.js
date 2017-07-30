@@ -3,12 +3,12 @@ import clearTestTmpAssets from '../../../helper/clearTestTmpAssets'
 import ImageConverter from '../../../convert/ImageMagick'
 
 describe('#TxtToJpg', () => {
-  /* AfterEach((done) => {
-   clearTestTmpAssets().fork(
-   (err) => console.error(err),
-   () => done()
-   )
-   }) */
+  afterEach((done) => {
+    clearTestTmpAssets().fork(
+      (err) => console.error(err),
+      () => done()
+    )
+  })
   it('Should convert txt to tiff', done => {
     ImageConverter.convert({
       src: path.join(__dirname, '../../assets/random-text.txt'),
