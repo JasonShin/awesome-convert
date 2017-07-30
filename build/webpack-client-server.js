@@ -2,14 +2,14 @@
 const fs = require('fs');
 const path = require('path');
 const chalk = require('chalk');
-// const express = require('express');
+// Const express = require('express');
 const webpack = require('webpack');
 const Server = require('webpack-dev-server');
 const webpackConfig = require('./webpack.dev');
 const config = require('./config');
 const LogPlugin = require('./log-plugin');
 
-// const app = express();
+// Const app = express();
 
 const devServerOptions = Object.assign({}, webpackConfig.devServer, config.devServer);
 
@@ -21,9 +21,9 @@ webpackConfig.entry.client = [
 	webpackConfig.entry.client
 ];
 
-// webpackConfig.plugins.push(new LogPlugin({host, port}));
+// WebpackConfig.plugins.push(new LogPlugin({host, port}));
 
-console.info(`Setting webpack for the dev server host: ${host} / post: ${port}`)
+console.info(`Setting webpack for the dev server host: ${host} / post: ${port}`);
 
 let compiler;
 
@@ -44,5 +44,5 @@ const server = new Server(compiler, Object.assign({
 }, devServerOptions));
 
 server.listen(port, host, (e, x) => {
-  console.log('dev server running! ', e, '  ', x)
+	console.log('dev server running! ', e, '  ', x);
 });

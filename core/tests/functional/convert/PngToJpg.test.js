@@ -11,7 +11,7 @@ describe('#PngToJpg - ImageConverter', () => {
   }) */
 
 	it('should create correct file when png is given', done => {
-		ImageConverter({
+		ImageConverter.convert({
 			src: path.join(__dirname, '../../assets/png-test.png'),
 			dest: path.join(__dirname, '../../assets/tmp/png-test.jpg')
 		})
@@ -19,7 +19,7 @@ describe('#PngToJpg - ImageConverter', () => {
 	});
 
 	it('should accept custom image conversion quality: 10', done => {
-		ImageConverter({
+		ImageConverter.convert({
 			src: path.join(__dirname, '../../assets/png-test.png'),
 			dest: path.join(__dirname, '../../assets/tmp/png-test.jpg'),
 			quality: 10
@@ -31,7 +31,7 @@ describe('#PngToJpg - ImageConverter', () => {
 	});
 
 	it('should accept custom image conversion quality: 20', done => {
-		ImageConverter({
+		ImageConverter.convert({
 			src: path.join(__dirname, '../../assets/png-test.png'),
 			dest: path.join(__dirname, '../../assets/tmp/png-test.jpg'),
 			quality: 20
@@ -43,7 +43,7 @@ describe('#PngToJpg - ImageConverter', () => {
 	});
 
 	it('should accept custom image conversion quality: 30', done => {
-		ImageConverter({
+		ImageConverter.convert({
 			src: path.join(__dirname, '../../assets/png-test.png'),
 			dest: path.join(__dirname, '../../assets/tmp/png-test.jpg'),
 			quality: 30
@@ -55,7 +55,7 @@ describe('#PngToJpg - ImageConverter', () => {
 	});
 
 	it('should accept custom image conversion quality: 40', done => {
-		ImageConverter({
+		ImageConverter.convert({
 			src: path.join(__dirname, '../../assets/png-test.png'),
 			dest: path.join(__dirname, '../../assets/tmp/png-test.jpg'),
 			quality: 40
@@ -67,7 +67,7 @@ describe('#PngToJpg - ImageConverter', () => {
 	});
 
 	it('should accept custom image conversion quality: 50', done => {
-		ImageConverter({
+		ImageConverter.convert({
 			src: path.join(__dirname, '../../assets/png-test.png'),
 			dest: path.join(__dirname, '../../assets/tmp/png-test.jpg'),
 			quality: 50
@@ -79,7 +79,7 @@ describe('#PngToJpg - ImageConverter', () => {
 	});
 
 	it('should accept custom image conversion quality: 100', done => {
-		ImageConverter({
+		ImageConverter.convert({
 			src: path.join(__dirname, '../../assets/png-test.png'),
 			dest: path.join(__dirname, '../../assets/tmp/png-test.jpg'),
 			quality: 100

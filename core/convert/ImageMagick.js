@@ -10,7 +10,7 @@ const Future = fastasy.Future;
  * @param dest
  * @param options [{ name: <e.g. quality>, value: 100 }]
  */
-const handler = ({
+const convert = ({
   src,
   dest,
   options = []
@@ -34,6 +34,6 @@ const handler = ({
 };
 
 export default {
-	handler,
+	convert,
 	name: 'gm'
 };

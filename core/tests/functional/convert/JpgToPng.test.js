@@ -1,12 +1,11 @@
 import path from 'path';
-import gm from 'gm';
 import imagesEqual from '../../../helper/imagesEqual';
 import clearTestTmpAssets from '../../../helper/clearTestTmpAssets';
 import ImageConverter from '../../../convert/ImageMagick';
 
 describe('#JpgToPng - ImageConverter', () => {
 	it('should create correct file when png is given', done => {
-		ImageConverter({
+		ImageConverter.convert({
 			src: path.join(__dirname, '../../assets/jpg-test.jpg'),
 			dest: path.join(__dirname, '../../assets/tmp/jpg-test.png')
 		})
@@ -15,7 +14,7 @@ describe('#JpgToPng - ImageConverter', () => {
 	it('should pass equality check', done => {
 		imagesEqual(
       path.join(__dirname, '../../assets/jpg-test.jpg'),
-      path.join(__dirname, '../../assets/tmp/jpg-test.png'),
+      path.join(__dirname, '../../assets/tmp/jpg-test.png')
     ).fork(() => console.error, res => done());
 	});
 	after(done => {

@@ -13,7 +13,7 @@ base.plugins.push(
 	}),
   new webpack.HotModuleReplacementPlugin(),
   new webpack.NoEmitOnErrorsPlugin()
-  //new FriendlyErrors()
+  // New FriendlyErrors()
 );
 
 // Push loader for css files
