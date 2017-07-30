@@ -9,6 +9,7 @@ const handler = ({
   options = []
 }) => {
   return new Future((rej, res) => {
+
     pdf.create(html, options).toFile(dest, (err, result) => {
       if (err) {
         return rej(err)
