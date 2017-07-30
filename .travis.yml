@@ -1,0 +1,15 @@
+sudo: required
+language: node_js
+node_js:
+  - "node"
+
+cache:
+  yarn: true
+  directories:
+    - node_modules
+
+services:
+  - docker
+
+script:
+  - docker-compose -f .docker/docker-compose.dev.test.yml

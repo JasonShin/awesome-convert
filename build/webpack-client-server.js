@@ -21,7 +21,7 @@ webpackConfig.entry.client = [
 	webpackConfig.entry.client
 ];
 
-webpackConfig.plugins.push(new LogPlugin({host, port}));
+// webpackConfig.plugins.push(new LogPlugin({host, port}));
 
 console.info(`Setting webpack for the dev server host: ${host} / post: ${port}`)
 
@@ -43,4 +43,6 @@ const server = new Server(compiler, Object.assign({
 	publicPath: compiler.options.publicPath
 }, devServerOptions));
 
-server.listen(port, host);
+server.listen(port, host, (e, x) => {
+  console.log('dev server running! ', e, '  ', x)
+});
