@@ -5,9 +5,10 @@
   "main": "index.js",
   "scripts": {
     "dev:server": "babel-watch core/index.js",
-    "dev:client": "node client/build/server.js",
+    "dev:client": "node build/webpack-client-server.js",
     "build": "webpack --config build/webpack.prod.js",
-    "lint": "xo **/client/**/*.{vue,js} !node_modules/**",
+    "lint": "xo ./**/*.{vue,js} !node_modules/**",
+    "lint:fix": "xo --fix ./**/*.{vue,js} !node_modules/**",
     "test:all": "cross-env NODE_ENV=test mocha --compilers js:babel-core/register --recursive \"core/tests/\""
   },
   "keywords": [
