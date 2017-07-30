@@ -2,7 +2,7 @@ import path from 'path'
 import gm from 'gm'
 import imagesEqual from '../../../helper/imagesEqual'
 import clearTestTmpAssets from '../../../helper/clearTestTmpAssets'
-import ImageConverter from '../../../convert/ImageConverter'
+import ImageConverter from '../../../convert/ImageMagick'
 
 describe('#JpgToPng - ImageConverter', () => {
   it('should create correct file when png is given', (done) => {

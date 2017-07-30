@@ -33,4 +33,7 @@ const handler = ({
   })
 }
 
-export default handler
+export default {
+  handler,
+  name: 'gm',
+}

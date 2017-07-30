@@ -1,0 +1,17 @@
+version: '2'
+
+services:
+  awesome-convert:
+    image: client
+    container_name: awesome-convert-dev-client
+    environment:
+      NODE_ENV: development
+      SERVER_URL: localhost
+    build:
+      context: .
+      dockerfile: .docker/node.dev.client.dockerfile
+    volumes:
+      - .:/home/node/app
+      - /home/node/app/node_modules
+    ports:
+      - "3001:4000"

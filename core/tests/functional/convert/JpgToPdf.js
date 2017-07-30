@@ -1,6 +1,6 @@
 import path from 'path'
 import clearTestTmpAssets from '../../../helper/clearTestTmpAssets'
-import ImageConverter from '../../../convert/ImageConverter'
+import ImageConverter from '../../../convert/ImageMagick'
 
 describe('#JpgToPdf', () => {
   /* afterEach((done) => {
