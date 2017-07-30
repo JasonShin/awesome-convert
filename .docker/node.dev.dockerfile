@@ -7,12 +7,12 @@ RUN echo $CORE
 WORKDIR $CORE
 
 # Install required packages
-RUN apt-get update -y
+RUN apt-get update -y > /dev/null
 RUN apt-get install -y \
     graphicsmagick \
     imagemagick > /dev/null
 
-RUN npm install -g html-pdf babel-watch > /dev/null
+RUN npm install -g --silent html-pdf babel-watch
 
 # Install packages without NPM trick
 COPY package.json $CORE

@@ -19,7 +19,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .counter {
   margin: 100px auto;
   border-radius: 3px;

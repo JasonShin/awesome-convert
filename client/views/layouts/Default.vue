@@ -1,13 +1,7 @@
-<template>
-  <div id="app">
-    <router-view></router-view>
-  </div>
-</template>
-
 <style>
   body {
     margin: 0;
-    font-size: 2rem;
+    font-size: 12px;
     font-family: -apple-system, BlinkMacSystemFont,
     'avenir next', avenir,
     helvetica, 'helvetica neue',
@@ -17,11 +11,27 @@
   }
   .page {
     text-align: center;
+  }
   /* nesting for the need to test postcss */
   code {
-    background-color: #f0f0f0;
+    background-color: red;
     padding: 3px 5px;
     border-radius: 2px;
   }
-  }
 </style>
+
+<template>
+  <div id="app">
+    <navigation />
+    <router-view></router-view>
+  </div>
+</template>
+
+<script>
+  import Navigation from 'components/Navigation.vue'
+  export default {
+    components: {
+      Navigation,
+    }
+  }
+</script>
