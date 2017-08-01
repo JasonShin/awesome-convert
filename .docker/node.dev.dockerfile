@@ -14,6 +14,11 @@ RUN apt-get install -y \
 
 RUN npm install -g --silent html-pdf babel-watch
 
+# Install Baseline
+COPY ./scripts/baseline/package.json $CORE
+COPY ./scripts/baseline/yarn.lock $CORE
+RUN yarn
+
 # Install packages without NPM trick
 COPY package.json $CORE
 COPY yarn.lock $CORE

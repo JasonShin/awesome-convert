@@ -48,5 +48,5 @@ const server = new Server(compiler, Object.assign({
 }, devServerOptions))
 
 server.listen(port, host, (e, x) => {
-  console.log('dev server running! ', e, '  ', x)
+  console.info('dev server running!')
 })

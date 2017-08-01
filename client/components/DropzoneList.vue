@@ -1,12 +1,8 @@
-<style>
-
-</style>
-
 <template>
   <div class="component">
+    test dropzone!
     <dropzone id="myVueDropzone" url="https://httpbin.org/post" v-on:vdropzone-success="showSuccess">
-      <!-- Optional parameters if any! -->
-      <input type="hidden" name="token" value="xxx">
+      test
     </dropzone>
   </div>
 </template>
@@ -15,6 +11,11 @@
   export default {
     components: {
       Dropzone
+    },
+    methods: {
+      'showSuccess': function (file) {
+        console.log('A file was successfully uploaded')
+      }
     }
   }
 </script>
