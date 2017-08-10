@@ -23,7 +23,7 @@
 
 <template>
   <div id="app">
-    <navigation test="testing prop" />
+    <navigation test="testing prop"></navigation>
     <router-view></router-view>
   </div>
 </template>
