@@ -8,6 +8,7 @@
     Ubuntu,
     'segoe ui', arial,
     sans-serif;
+    color: #444;
   }
   .page {
     text-align: center;
@@ -17,6 +18,9 @@
     background-color: red;
     padding: 3px 5px;
     border-radius: 2px;
+  }
+  #app {
+    border: 1px solid black;
   }
 </style>
 
@@ -28,7 +32,7 @@
 </template>
 
 <script>
-  import Navigation from 'components/Navigation.vue'
+  import Navigation from './Navigation.vue'
   export default {
     components: {
       Navigation,

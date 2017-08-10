@@ -1,23 +1,27 @@
+<style>
+  .terminal {
+    width: 60%;
+    height: 500px;
+  }
+</style>
 <template>
   <div class="page">
     <counter></counter>
-    <p>
-      <el-button type="primary">Primary Button</el-button>
-      checking dropzone
-      <dropzone-list></dropzone-list>
-      test To get started, edit files in <code>./client</code> and save ???.
-    </p>
+    <div class="terminal">
+      <terminal></terminal>
+    </div>
+    <el-button type="primary">Primary Button</el-button>
   </div>
 </template>
 
 <script>
 import Counter from 'components/Counter'
-import DropzoneList from 'components/DropzoneList'
+import Terminal from 'components/Terminal'
 
 export default {
   components: {
     Counter,
-    DropzoneList,
+    Terminal,
   }
 }
 </script>
