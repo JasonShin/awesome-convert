@@ -47,6 +47,9 @@
 
 <script>
   export default {
+    props: {
+      test: String,
+    },
     data: () => ({
       navItems: [
         { label: 'Home', url: '/' },

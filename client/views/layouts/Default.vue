@@ -10,9 +10,6 @@
     sans-serif;
     color: #444;
   }
-  .page {
-    text-align: center;
-  }
   /* nesting for the need to test postcss */
   code {
     background-color: red;
@@ -26,7 +23,7 @@
 
 <template>
   <div id="app">
-    <navigation />
+    <navigation test="testing prop" />
     <router-view></router-view>
   </div>
 </template>

@@ -28,6 +28,7 @@
   .control {
     margin-left: 5px;
     margin-right: 5px;
+    cursor: pointer;
   }
   .left {
     display: flex;
@@ -48,9 +49,9 @@
 <template>
   <div class="terminalHead">
     <div class="left">
-      <div class="red control"></div>
-      <div class="yellow control"></div>
-      <div class="green control"></div>
+      <div class="red control" v-on:click="this.clickRed"></div>
+      <div class="yellow control" v-on:click="this.clickYellow"></div>
+      <div class="green control" v-on:click="this.clickGreen"></div>
     </div>
     <div class="center"></div>
     <div class="right"></div>
@@ -59,6 +60,16 @@
 
 <script>
   export default {
-  
+    methods: {
+      clickRed() {
+        console.log('clicked red')
+      },
+      clickYellow() {
+        console.log('clicked yellow')
+      },
+      clickGreen() {
+        console.log('click green')
+      }
+    }
   }
 </script>
