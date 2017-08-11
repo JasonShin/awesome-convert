@@ -9,7 +9,7 @@
 <template>
   <div class="command">
     <div>Progress {{ percent }}%</div>
-    <div>[###]</div>
+    <div><span>[</span> <span>{{ hashes }}</span> <span>]</span></div>
   </div>
 </template>
 
@@ -17,9 +17,20 @@
   export default {
     props: {
       percent: Number,
+      hashes: Array,
+    },
+    data: () => ({
+      hash: '=',
+      hashLast: '>',
+    }),
+    mounted() {
+      // For testing: renders initial hash
+      this.renderHash();
     },
     methods: {
-    
+      renderHash() {
+        this.hashes = '===='
+      }
     }
   }
 </script>

@@ -42,6 +42,7 @@
     </div>
     <div class="body">
       <terminal-command class="terminalCommand" message="test command prompt! Upload your file!"></terminal-command>
+      <terminal-progress></terminal-progress>
     </div>
   </div>
 </template>
@@ -49,10 +50,12 @@
 <script>
   import TerminalHead from './TerminalHead.vue'
   import TerminalCommand from './TerminalCommand.vue'
+  import TerminalProgress from './TerminalProgress.vue'
   export default {
     components: {
       TerminalHead,
       TerminalCommand,
+      TerminalProgress,
     }
   }
 </script>
