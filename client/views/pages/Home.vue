@@ -6,6 +6,7 @@
 </style>
 <template>
   <div class="page">
+    <dragzone></dragzone>
     <counter></counter>
     <div class="terminal">
       <terminal></terminal>
@@ -17,11 +18,13 @@
 <script>
 import Counter from 'components/Counter'
 import Terminal from 'components/Terminal'
+import Dragzone from 'components/Dragzone'
 
 export default {
   components: {
     Counter,
     Terminal,
+    Dragzone,
   }
 }
 </script>
