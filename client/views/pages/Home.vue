@@ -6,7 +6,11 @@
 </style>
 <template>
   <div class="page">
-    <dragzone></dragzone>
+    <dragzone>
+      <div>
+        testing slot!!
+      </div>
+    </dragzone>
     <counter></counter>
     <div class="terminal">
       <terminal></terminal>
