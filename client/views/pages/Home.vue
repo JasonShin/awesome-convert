@@ -6,7 +6,9 @@
 </style>
 <template>
   <div class="page">
-    <dragzone>
+    <dragzone v-on:on-drop="this.onDrop"
+              v-bind:acceptedFormats="['jpeg', 'tiff']"
+    >
       <div>
         testing slot!!
       </div>
@@ -29,6 +31,11 @@ export default {
     Counter,
     Terminal,
     Dragzone,
+  },
+  methods: {
+    onDrop(rejectedFiles, acceptedFiles) {
+      console.log('on drop home ', rejectedFiles, '   accepted ', acceptedFiles)
+    }
   }
 }
 </script>

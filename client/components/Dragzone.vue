@@ -31,11 +31,14 @@
 
 <script>
   export default {
+    // features: preview image ratio support
     props: {
       // Array of accepted formats such as pdf, jpg, png
       acceptedFormats: Array,
       // Children items to render
       children: {},
+      // Callback to ondrop
+      onDrop: Function,
       // Callback to dragover
       onDragover: Function,
       // Disables e.preventdefault onDrop
@@ -60,13 +63,15 @@
       onDrop(e) {
         e.preventDefault()
         console.log('you have drag and dropped something! ', e.dataTransfer.files)
-        const files = Array.from(e.dataTransfer.files)
-        const promises = files.map(file => this.getImageFile(file))
-        console.log('checking files ', files);
+        // Accepting everything so far
+        const acceptedFiles = this.getAcceptedFiles(e.dataTransfer.files)
+        const rejectedFiles = this.getRejectedFiles(e.dataTransfer.files)
+        const promises = acceptedFiles.map(file => this.getImageFile(file))
         Promise.all(promises).then(values => {
-          console.log('resolved all promises ', values)
           // assign blob as preview on each file
-          this.acceptedFiles = files.map((file, index) => Object.assign(file, { preview: values[index] }))
+          this.acceptedFiles = acceptedFiles.map((file, index) =>
+            Object.assign(file, { preview: values[index] }))
+          this.$emit('on-drop', rejectedFiles, this.acceptedFiles)
         })
       },
       onDragover(e) {
@@ -76,6 +81,24 @@
         this.$refs.fileInput.click();
       },
       // Helpers
+      getAcceptedFiles(rawFiles) {
+        const files = Array.from(rawFiles)
+        return files.filter(file => {
+          const currentType = file.type.split('/').reverse()[0]
+          const rule = new RegExp(currentType, 'i')
+          // Accepted formats might not be lower cased
+          return rule.test(this.acceptedFormats.map(f => f.toLowerCase()).join(''))
+        })
+      },
+      getRejectedFiles(rawFiles) {
+        const files = Array.from(rawFiles)
+        return files.filter(file => {
+          const currentType = file.type.split('/').reverse()[0]
+          const rule = new RegExp(currentType, 'i')
+          // Accepted formats might not be lower cased
+          return !rule.test(this.acceptedFormats.map(f => f.toLowerCase()).join(''))
+        })
+      },
       getImageFile(file) {
         return new Promise((resolve, reject) => {
           try {
