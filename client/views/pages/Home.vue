@@ -7,10 +7,14 @@
 <template>
   <div class="page">
     <dragzone v-on:on-drop="this.onDrop"
+              v-bind:multiple="true"
               v-bind:acceptedFormats="['jpeg', 'tiff']"
     >
       <div>
-        testing slot!!
+        <div v-for="file in this.acceptedFiles">
+          Preview for {{ file.name }}
+          <img v-bind:src="file.preview" />
+        </div>
       </div>
     </dragzone>
     <counter></counter>
@@ -32,10 +36,16 @@ export default {
     Terminal,
     Dragzone,
   },
+  data: () => ({
+    acceptedFiles: [],
+    rejectedFiles: [],
+  }),
   methods: {
     onDrop(rejectedFiles, acceptedFiles) {
+      this.acceptedFiles = acceptedFiles
+      this.rejectedFiles = rejectedFiles
       console.log('on drop home ', rejectedFiles, '   accepted ', acceptedFiles)
-    }
-  }
+    },
+  },
 }
 </script>

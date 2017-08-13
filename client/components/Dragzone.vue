@@ -16,13 +16,12 @@
        v-on:drop="this.onDrop">
     drag and drop test
     <slot>
-      No file was added yet
+      No file was added yet.
     </slot>
-    <div v-for="file in acceptedFiles">
-      <img v-bind:src="file.preview">
-    </div>
     <input class="fileInput"
+           v-on:change="this.onSelect"
            v-bind:name="this.name"
+           v-bind:multiple="this.multiple"
            type="file"
            ref="fileInput"
     />
@@ -32,6 +31,7 @@
 <script>
   export default {
     // features: preview image ratio support
+    // Get human readable filesize
     props: {
       // Array of accepted formats such as pdf, jpg, png
       acceptedFormats: Array,
@@ -56,23 +56,25 @@
     },
     data: () => ({
       acceptedFiles: [],
+      rejectedFiles: [],
       name: null,
     }),
     methods: {
+      onSelect(e) {
+        const fileList = Array.from(e.target.files)
+        this.filterFileList(fileList)
+          .then(values => this.$emit('on-drop', values.rejectedFiles, values.acceptedFiles))
+          .catch(e => console.warn('Could not filter file list onSelect due to ', e))
+      },
       // Events
       onDrop(e) {
         e.preventDefault()
         console.log('you have drag and dropped something! ', e.dataTransfer.files)
         // Accepting everything so far
-        const acceptedFiles = this.getAcceptedFiles(e.dataTransfer.files)
-        const rejectedFiles = this.getRejectedFiles(e.dataTransfer.files)
-        const promises = acceptedFiles.map(file => this.getImageFile(file))
-        Promise.all(promises).then(values => {
-          // assign blob as preview on each file
-          this.acceptedFiles = acceptedFiles.map((file, index) =>
-            Object.assign(file, { preview: values[index] }))
-          this.$emit('on-drop', rejectedFiles, this.acceptedFiles)
-        })
+        const fileList = Array.from(e.dataTransfer.files)
+        this.filterFileList(fileList).then(values =>
+          this.$emit('on-drop', values.rejectedFiles, values.acceptedFiles))
+          .catch(e => console.warn('Could not filter file list onDrop due to ', e))
       },
       onDragover(e) {
         e.preventDefault()
@@ -81,8 +83,25 @@
         this.$refs.fileInput.click();
       },
       // Helpers
-      getAcceptedFiles(rawFiles) {
-        const files = Array.from(rawFiles)
+      filterFileList(fileList) {
+        return new Promise((res, rej) => {
+          try {
+            const promises = fileList.map(file => this.getBlobFile(file))
+            Promise.all(promises).then(values => {
+              // assign blob as preview on each file
+              const files = fileList.map((file, index) =>
+                Object.assign(file, { preview: values[index] }))
+              const acceptedFiles = this.getAcceptedFiles(files)
+              const rejectedFiles = this.getRejectedFiles(files)
+              return res({ rejectedFiles, acceptedFiles })
+              // this.$emit('on-drop', rejectedFiles, acceptedFiles)
+            })
+          } catch (e) {
+            return rej(e)
+          }
+        })
+      },
+      getAcceptedFiles(files) {
         return files.filter(file => {
           const currentType = file.type.split('/').reverse()[0]
           const rule = new RegExp(currentType, 'i')
@@ -90,8 +109,7 @@
           return rule.test(this.acceptedFormats.map(f => f.toLowerCase()).join(''))
         })
       },
-      getRejectedFiles(rawFiles) {
-        const files = Array.from(rawFiles)
+      getRejectedFiles(files) {
         return files.filter(file => {
           const currentType = file.type.split('/').reverse()[0]
           const rule = new RegExp(currentType, 'i')
@@ -99,7 +117,7 @@
           return !rule.test(this.acceptedFormats.map(f => f.toLowerCase()).join(''))
         })
       },
-      getImageFile(file) {
+      getBlobFile(file) {
         return new Promise((resolve, reject) => {
           try {
             const objectURL = window.URL.createObjectURL(file)
