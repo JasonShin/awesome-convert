@@ -6,8 +6,10 @@
 </style>
 <template>
   <div class="page">
-    <dragzone v-on:on-drop="this.onDrop"
+    <dragzone v-on:onDrop="this.onDrop"
               v-bind:multiple="true"
+              v-bind:minSize="'10kb'"
+              v-bind:maxSize="'100kb'"
               v-bind:acceptedFormats="['jpeg', 'tiff']"
     >
       <div>
