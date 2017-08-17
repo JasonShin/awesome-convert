@@ -86,7 +86,20 @@
         e.preventDefault()
         // Accepting everything so far
         const fileList = [Array.from(e.dataTransfer.files)]
-        console.log('new file list ', fileList)
+          .map(x => {
+            if (this.multiple) {
+              // If it's multiple, just return all
+              return x
+            } else if (!this.multiple && x.length > 1) {
+              // If multiple is false but it has more than 1
+              // It returns just head portion
+              // Make sure to box it again since it's a single value
+              return [x[0]]
+            }
+            // Else, just return whatever
+            return x
+          })
+          .pop()
         /**
          * .map(x => {
             if (this.multiple) {

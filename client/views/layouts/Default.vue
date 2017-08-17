@@ -16,9 +16,6 @@
     padding: 3px 5px;
     border-radius: 2px;
   }
-  #app {
-    border: 1px solid black;
-  }
 </style>
 
 <template>
