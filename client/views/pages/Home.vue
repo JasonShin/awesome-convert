@@ -7,10 +7,10 @@
 <template>
   <div class="page">
     <dragzone v-on:onDrop="this.onDrop"
-              v-bind:multiple="true"
-              v-bind:minSize="'10kb'"
-              v-bind:maxSize="'100kb'"
-              v-bind:acceptedFormats="['jpeg', 'tiff']"
+              v-bind:multiple="false"
+              v-bind:minSize="'1kb'"
+              v-bind:maxSize="'100mb'"
+              v-bind:acceptedFormats="['jpeg', 'tiff', 'png']"
     >
       <div>
         <div v-for="file in this.acceptedFiles">
@@ -19,23 +19,14 @@
         </div>
       </div>
     </dragzone>
-    <counter></counter>
-    <div class="terminal">
-      <terminal></terminal>
-    </div>
-    <el-button type="primary">Primary Button</el-button>
   </div>
 </template>
 
 <script>
-import Counter from 'components/Counter'
-import Terminal from 'components/Terminal'
 import Dragzone from 'components/Dragzone'
 
 export default {
   components: {
-    Counter,
-    Terminal,
     Dragzone,
   },
   data: () => ({

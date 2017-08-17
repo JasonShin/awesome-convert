@@ -1,4 +1,7 @@
 <style scoped>
+  .holder-base {
+  
+  }
   .holder {
     border: 3px dotted #323232;
     border-radius: 20px;
@@ -10,8 +13,8 @@
   }
 </style>
 <template>
-  <div class="holder"
-       v-on:click="this.onFileButtonClick"
+  <div v-bind:style="this.holderStyle ? this.holderStyle : this.defaultHolderStyle"
+       v-on:click="this._onFileButtonClick"
        v-on:dragover="this._onDragover"
        v-on:drop="this._onDrop">
     drag and drop test
@@ -19,7 +22,7 @@
       No file was added yet.
     </slot>
     <input class="fileInput"
-           v-on:change="this.onSelect"
+           v-on:change="this._onSelect"
            v-bind:name="this.name"
            v-bind:multiple="this.multiple"
            type="file"
@@ -34,6 +37,8 @@
     // features: preview image ratio support
     // Get human readable filesize
     props: {
+      // List of files to display using default layout
+      values: [],
       // Array of accepted formats such as pdf, jpg, png
       acceptedFormats: Array,
       // Children items to render
@@ -54,25 +59,49 @@
       maxSize: String,
       // Minimum file size e.g. "10kb 10mb 10gb"
       minSize: String,
+      // Default style
+      style: String,
+      // Class used when drag over is active and accepted
+      activeStyle: String,
+      // Class used when drag over is active and rejected
+      rejectStyle: String,
     },
     data: () => ({
-      acceptedFiles: [],
-      rejectedFiles: [],
+      // Default holder style\
+      defaultHolderStyle: { border: '3px dotted #323232', borderRadius: '20px', minWidth: '300px', minHeight: '300px' },
+      holderStyle: null,
       name: null,
     }),
     methods: {
-      onSelect(e) {
+      _onSelect(e) {
         const fileList = Array.from(e.target.files)
         this.filterFileList(fileList)
           .then(values => this.$emit('onDrop', values.rejectedFiles, values.acceptedFiles))
           .catch(e => console.warn('Could not filter file list onSelect due to ', e))
       },
-      // Events
+      /**
+       * Event STARTS
+       */
       _onDrop(e) {
         e.preventDefault()
-        console.log('you have drag and dropped something! ', e.dataTransfer.files)
         // Accepting everything so far
-        const fileList = Array.from(e.dataTransfer.files)
+        const fileList = [Array.from(e.dataTransfer.files)]
+        console.log('new file list ', fileList)
+        /**
+         * .map(x => {
+            if (this.multiple) {
+              // If it's multiple, just return all
+              return x
+            } else if (!this.multiple && x.length > 1) {
+              // If multiple is false but it has more than 1
+              // It returns just head portion
+              return x[0]
+            }
+            // Else, just return whatever
+            return x
+          })
+         .pop()
+         */
         this.filterFileList(fileList).then(values =>
           this.$emit('onDrop', values.rejectedFiles, values.acceptedFiles))
           .catch(e => console.warn('Could not filter file list onDrop due to ', e))
@@ -80,10 +109,21 @@
       _onDragover(e) {
         e.preventDefault()
       },
-      onFileButtonClick() {
+      _onFileButtonClick() {
         this.$refs.fileInput.click();
       },
-      // Helpers
+      /**
+       * Event ENDS
+       */
+      /**
+       * Styles STARTS
+       */
+      /**
+       * Styles ENDS
+       */
+      /**
+       * Helpers STARTS
+       */
       filterFileList(fileList) {
         return new Promise((res, rej) => {
           try {
@@ -92,7 +132,6 @@
               // assign blob as preview on each file
               const files = fileList.map((file, index) =>
                 Object.assign(file, { preview: values[index] }))
-              console.log('checking files ', files)
               const acceptedFiles = this.getAcceptedFiles(files)
               const rejectedFiles = this.getRejectedFiles(files)
               return res({ rejectedFiles, acceptedFiles })
@@ -108,7 +147,6 @@
           // Get current file format from a file type e.g. "document/pdf"
           const currentType = file.type.split('/').reverse()[0]
           // Accepted formats might not be lower cased
-          console.log('filtering file ', file)
           // Checking formats
           return this.checkFormats(currentType) &&
             // Checking file size by min and max
@@ -120,9 +158,9 @@
           // Get current file format from a file type e.g. "document/pdf"
           const currentType = file.type.split('/').reverse()[0]
           // Accepted formats might not be lower cased
-          return !this.checkFormats(currentType) &&
+          return !this.checkFormats(currentType) ||
             // Checking file size by min and max
-            this.checkFileSize(file.size)
+            !this.checkFileSize(file.size)
         })
       },
       /**
@@ -162,8 +200,10 @@
             return reject(e)
           }
         })
-        
-      }
-    }
+      },
+      /**
+       * Helpers ENDS
+       */
+    },
   }
 </script>
