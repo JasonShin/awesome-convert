@@ -16,6 +16,13 @@
     padding: 3px 5px;
     border-radius: 2px;
   }
+  .router-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
 </style>
 
 <template>

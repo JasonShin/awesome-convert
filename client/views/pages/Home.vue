@@ -11,6 +11,11 @@
   .content {
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .content-inner {
+    width: 70%;
   }
   .wrapper {
     width: 70%;
@@ -43,6 +48,21 @@
   .cta {
     height: 50px;
   }
+  .file-list {
+    display: flex;
+    flex-direction: column;
+  }
+  .file-entry {
+    display: flex;
+    align-items: center;
+    height: 20px;
+    width: 100%;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    flex-direction: row;
+    margin-bottom: 10px;
+    padding: 10px;
+  }
 </style>
 <template>
   <div class="page">
@@ -50,7 +70,7 @@
               ref="dropzone"
               class="dropzone"
               v-bind:containerClick="false"
-              v-bind:multiple="false"
+              v-bind:multiple="true"
               v-bind:minSize="'1kb'"
               v-bind:maxSize="'400mb'"
               v-bind:acceptedFormats="['jpeg', 'tiff', 'png']"
@@ -58,29 +78,31 @@
               v-bind:activeStyle="{width: '100%', height: '100%', border: '3px solid red'}"
     >
       <div class="content">
-        <div class="cta-wrapper">
-          <div class="logo">
-            <h1>Awesome convert anything to anything!</h1>
+        <div class="content-inner">
+          <div class="cta-wrapper">
+            <div class="logo">
+              <h1>Awesome convert anything to anything!</h1>
+            </div>
+            <div class="cta">
+              <el-button type="primary" v-on:click="this.onClickCta">Select a file</el-button>
+              <el-dropdown>
+                <span class="el-dropdown-link"><i class="el-icon-caret-bottom el-icon--right"></i></span>
+                <el-dropdown-menu slot="dropdown">
+                  <el-dropdown-item>Action 1</el-dropdown-item>
+                  <el-dropdown-item>Action 2</el-dropdown-item>
+                  <el-dropdown-item>Action 3</el-dropdown-item>
+                  <el-dropdown-item disabled>Action 4</el-dropdown-item>
+                  <el-dropdown-item divided>Action 5</el-dropdown-item>
+                </el-dropdown-menu>
+              </el-dropdown>
+            </div>
           </div>
-          <div class="cta">
-            <el-button type="primary" v-on:click="this.onClickCta">Select a file</el-button>
-            <el-dropdown>
-              <span class="el-dropdown-link"><i class="el-icon-caret-bottom el-icon--right"></i></span>
-              <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item>Action 1</el-dropdown-item>
-                <el-dropdown-item>Action 2</el-dropdown-item>
-                <el-dropdown-item>Action 3</el-dropdown-item>
-                <el-dropdown-item disabled>Action 4</el-dropdown-item>
-                <el-dropdown-item divided>Action 5</el-dropdown-item>
-              </el-dropdown-menu>
-            </el-dropdown>
+          <div class="file-list">
+            <div class="file-entry"
+                 v-for="file in this.acceptedFiles">
+              <div>Preview for {{ file.name }}</div>
+            </div>
           </div>
-        </div>
-        <div v-for="file in this.acceptedFiles">
-          Preview for {{ file.name }}
-          <img class="dropzone-preview"
-               v-bind:src="file.preview"
-          />
         </div>
       </div>
     </dragzone>
