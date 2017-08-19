@@ -8,10 +8,10 @@
 </style>
 <template>
   <div v-bind:style="this.holderStyle"
+       v-on:click="this.containerClick ? this._onFileButtonClick : null"
        v-on:dragover="this._onDragover"
        v-on:dragleave="this._onDragleave"
        v-on:drop="this._onDrop">
-    drag and drop test
     <slot>
       No file was added yet.
     </slot>
@@ -36,6 +36,8 @@
       acceptedFormats: Array,
       // Children items to render
       children: {},
+      // Container click to open file explorer
+      containerClick: Boolean,
       // Callback to ondrop
       onDrop: Function,
       // Callback to dragover
@@ -64,6 +66,9 @@
       name: null,
     }),
     methods: {
+      open() {
+        this.$refs.fileInput.click();
+      },
       _onSelect(e) {
         const fileList = Array.from(e.target.files)
         this.filterFileList(fileList)

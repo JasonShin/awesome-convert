@@ -47,7 +47,9 @@
 <template>
   <div class="page">
     <dragzone v-on:onDrop="this.onDrop"
+              ref="dropzone"
               class="dropzone"
+              v-bind:containerClick="false"
               v-bind:multiple="false"
               v-bind:minSize="'1kb'"
               v-bind:maxSize="'400mb'"
@@ -57,8 +59,11 @@
     >
       <div class="content">
         <div class="cta-wrapper">
+          <div class="logo">
+            <h1>Awesome convert anything to anything!</h1>
+          </div>
           <div class="cta">
-            <el-button type="primary">Select a file</el-button>
+            <el-button type="primary" v-on:click="this.onClickCta">Select a file</el-button>
             <el-dropdown>
               <span class="el-dropdown-link"><i class="el-icon-caret-bottom el-icon--right"></i></span>
               <el-dropdown-menu slot="dropdown">
@@ -83,31 +88,36 @@
 </template>
 
 <script>
-import R from 'ramda'
-import Dragzone from 'components/Dragzone'
-// TODO: Fix this
-import El from 'element-ui'
-
-export default {
-  components: {
-    El,
-    Dragzone,
-  },
-  data: () => ({
-    acceptedFiles: [],
-    rejectedFiles: [],
-    acceptedFormat: '',
-  }),
-  methods: {
-    onDrop(rejectedFiles, acceptedFiles) {
-      this.acceptedFiles = acceptedFiles
-      this.rejectedFiles = rejectedFiles
-      const getHeadFormat = R.compose(
-        R.prop('type'),
-        R.head,
-      )
-      this.acceptedFormat = getHeadFormat(acceptedFiles)
+  import Vue from 'vue'
+  import R from 'ramda'
+  import Dragzone from 'components/Dragzone'
+  // TODO: Fix this
+  import El from 'element-ui'
+  
+  const bus = new Vue()
+  export default {
+    components: {
+      El,
+      Dragzone,
     },
-  },
-}
+    data: () => ({
+      acceptedFiles: [],
+      rejectedFiles: [],
+      acceptedFormat: '',
+    }),
+    methods: {
+      onDrop(rejectedFiles, acceptedFiles) {
+        this.acceptedFiles = acceptedFiles
+        this.rejectedFiles = rejectedFiles
+        const getHeadFormat = R.compose(
+          R.prop('type'),
+          R.head,
+        )
+        this.acceptedFormat = getHeadFormat(acceptedFiles)
+      },
+      onClickCta() {
+        this.$refs.dropzone.open();
+      }
+    },
+  }
 </script>
