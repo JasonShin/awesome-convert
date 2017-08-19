@@ -17,26 +17,10 @@
   .content-inner {
     width: 70%;
   }
-  .wrapper {
-    width: 70%;
-  }
   .page .dropzone {
     width: 100%;
     height: 100%;
     border: 0;
-  }
-  .dropzone-preview {
-    width: 60%;
-    height: 60%;
-  }
-  .controls {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    min-height: 100px;
-  }
-  .acceptedFormat {
-    width: 33.333%;
   }
   .cta-wrapper {
     width: 100%;
@@ -44,24 +28,6 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-  }
-  .cta {
-    height: 50px;
-  }
-  .file-list {
-    display: flex;
-    flex-direction: column;
-  }
-  .file-entry {
-    display: flex;
-    align-items: center;
-    height: 20px;
-    width: 100%;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    flex-direction: row;
-    margin-bottom: 10px;
-    padding: 10px;
   }
 </style>
 <template>
@@ -79,30 +45,13 @@
     >
       <div class="content">
         <div class="content-inner">
+          <div class="logo">
+            <h1>Awesome convert anything to anything!</h1>
+          </div>
           <div class="cta-wrapper">
-            <div class="logo">
-              <h1>Awesome convert anything to anything!</h1>
-            </div>
-            <div class="cta">
-              <el-button type="primary" v-on:click="this.onClickCta">Select a file</el-button>
-              <el-dropdown>
-                <span class="el-dropdown-link"><i class="el-icon-caret-bottom el-icon--right"></i></span>
-                <el-dropdown-menu slot="dropdown">
-                  <el-dropdown-item>Action 1</el-dropdown-item>
-                  <el-dropdown-item>Action 2</el-dropdown-item>
-                  <el-dropdown-item>Action 3</el-dropdown-item>
-                  <el-dropdown-item disabled>Action 4</el-dropdown-item>
-                  <el-dropdown-item divided>Action 5</el-dropdown-item>
-                </el-dropdown-menu>
-              </el-dropdown>
-            </div>
+            <call-to-action v-on:on-click-cta="this.onClickCta"></call-to-action>
           </div>
-          <div class="file-list">
-            <div class="file-entry"
-                 v-for="file in this.acceptedFiles">
-              <div>Preview for {{ file.name }}</div>
-            </div>
-          </div>
+          <file-list v-bind:files="this.acceptedFiles"></file-list>
         </div>
       </div>
     </dragzone>
@@ -110,17 +59,19 @@
 </template>
 
 <script>
-  import Vue from 'vue'
   import R from 'ramda'
   import Dragzone from 'components/Dragzone'
+  import FileList from 'components/FileList'
+  import CallToAction from 'components/CallToAction'
   // TODO: Fix this
   import El from 'element-ui'
   
-  const bus = new Vue()
   export default {
     components: {
       El,
       Dragzone,
+      FileList,
+      CallToAction,
     },
     data: () => ({
       acceptedFiles: [],
