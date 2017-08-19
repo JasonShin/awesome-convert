@@ -2,20 +2,14 @@
   .holder-base {
   
   }
-  .holder {
-    border: 3px dotted #323232;
-    border-radius: 20px;
-    min-width: 300px;
-    min-height: 300px;
-  }
   .fileInput {
     display: none;
   }
 </style>
 <template>
-  <div v-bind:style="this.holderStyle ? this.holderStyle : this.defaultHolderStyle"
-       v-on:click="this._onFileButtonClick"
+  <div v-bind:style="this.holderStyle"
        v-on:dragover="this._onDragover"
+       v-on:dragleave="this._onDragleave"
        v-on:drop="this._onDrop">
     drag and drop test
     <slot>
@@ -23,7 +17,6 @@
     </slot>
     <input class="fileInput"
            v-on:change="this._onSelect"
-           v-bind:name="this.name"
            v-bind:multiple="this.multiple"
            type="file"
            ref="fileInput"
@@ -53,8 +46,6 @@
       inputProps: Array,
       // Allow multiple drag and drop
       multiple: Boolean,
-      // Name attribute for the input tag
-      name: String,
       // Max file size e.g. "10kb 10mb 10gb"
       maxSize: String,
       // Minimum file size e.g. "10kb 10mb 10gb"
@@ -62,12 +53,12 @@
       // Default style
       style: String,
       // Class used when drag over is active and accepted
-      activeStyle: String,
+      activeStyle: Object,
       // Class used when drag over is active and rejected
       rejectStyle: String,
     },
     data: () => ({
-      // Default holder style\
+      // Default holder style
       defaultHolderStyle: { border: '3px dotted #323232', borderRadius: '20px', minWidth: '300px', minHeight: '300px' },
       holderStyle: null,
       name: null,
@@ -100,27 +91,19 @@
             return x
           })
           .pop()
-        /**
-         * .map(x => {
-            if (this.multiple) {
-              // If it's multiple, just return all
-              return x
-            } else if (!this.multiple && x.length > 1) {
-              // If multiple is false but it has more than 1
-              // It returns just head portion
-              return x[0]
-            }
-            // Else, just return whatever
-            return x
-          })
-         .pop()
-         */
         this.filterFileList(fileList).then(values =>
           this.$emit('onDrop', values.rejectedFiles, values.acceptedFiles))
           .catch(e => console.warn('Could not filter file list onDrop due to ', e))
       },
       _onDragover(e) {
         e.preventDefault()
+        console.log('dragover!!')
+        this.holderStyle = this.activeStyle
+      },
+      _onDragleave(e) {
+        e.preventDefault()
+        console.log('dragleave!')
+        this.holderStyle = this.style
       },
       _onFileButtonClick() {
         this.$refs.fileInput.click();
