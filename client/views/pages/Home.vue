@@ -22,6 +22,9 @@
     height: 100%;
     border: 0;
   }
+  .logo {
+    text-align: center;
+  }
   .cta-wrapper {
     width: 100%;
     display: flex;
@@ -40,7 +43,7 @@
               v-bind:minSize="'1kb'"
               v-bind:maxSize="'400mb'"
               v-bind:acceptedFormats="['jpeg', 'tiff', 'png']"
-              v-bind:style="{width: '100%', height: '100%', border: '1px solid black'}"
+              v-bind:defaultStyle="{width: '100%', height: '100%', border: '1px solid black'}"
               v-bind:activeStyle="{width: '100%', height: '100%', border: '3px solid red'}"
     >
       <div class="content">
@@ -51,7 +54,14 @@
           <div class="cta-wrapper">
             <call-to-action v-on:on-click-cta="this.onClickCta"></call-to-action>
           </div>
-          <file-list v-bind:files="this.acceptedFiles"></file-list>
+          <file-list v-bind:files="this.acceptedFiles"
+                     v-bind:convertOptions="[
+                       {
+                         value: 'test',
+                         label: 'test',
+                       }
+                     ]"
+          ></file-list>
         </div>
       </div>
     </dragzone>

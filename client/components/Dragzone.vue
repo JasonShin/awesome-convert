@@ -62,7 +62,7 @@
     data: () => ({
       // Default holder style
       defaultHolderStyle: { border: '3px dotted #323232', borderRadius: '20px', minWidth: '300px', minHeight: '300px' },
-      holderStyle: null,
+      holderStyle: { border: '3px dotted #323232', borderRadius: '20px', minWidth: '300px', minHeight: '300px' },
       name: null,
     }),
     methods: {
@@ -102,7 +102,7 @@
       },
       _onDragover(e) {
         e.preventDefault()
-        console.log('dragover!!')
+        console.log('dragover!! ', this.activeStyle)
         this.holderStyle = this.activeStyle
       },
       _onDragleave(e) {
