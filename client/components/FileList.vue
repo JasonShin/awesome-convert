@@ -18,14 +18,27 @@
   }
   .left {
     width: 40%;
+    padding: 10px;
   }
   .center {
     width: 20%;
+    padding: 10px;
   }
   .right {
     display: flex;
     flex-direction: row;
     width: 40%;
+    padding: 10px;
+    align-items: center;
+  }
+  .status--ready {
+    background-color: #3a87ad;
+    color: white;
+    border-radius: 20px;
+    padding: 3px 6px;
+  }
+  .file-size {
+    margin-left: 5px;
   }
 </style>
 
@@ -39,35 +52,37 @@
       <div class="center">
         <el-cascader v-bind:options="[
             {
-              value: 'Images',
+              value: 'images',
               label: 'Images',
               children: [
                 { value: 'jpg', label: 'jpg' },
                 { value: 'png', label: 'png' },
                 { value: 'gif', label: 'gif' },
-              ]
+              ],
             }, {
-              value: 'Images',
-              label: 'Images',
+              value: 'documents',
+              label: 'Documents',
               children: [
                 { value: 'jpg', label: 'jpg' },
                 { value: 'png', label: 'png' },
                 { value: 'gif', label: 'gif' },
-              ]
+              ],
             }
           ]"
-          v-model="this._convertOptions"
+                     v-model="this.selectedOption"
+                     
         ></el-cascader>
       </div>
       <div class="right">
-        <div class="status">ready</div>
-        <div class="file-size">{{ file.size }}</div>
+        <div class="status--ready">ready</div>
+        <div class="file-size">{{ getPrettySize(file.size) }}</div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+  import bytes from 'bytes'
   import El from 'element-ui'
   export default {
     props: {
@@ -77,25 +92,16 @@
     components: {
       El,
     },
-    mounted() {
-      console.log('checking convert options ', this.convertOptions, '  ', this._convertOptions)
-    },
     data: () => {
-      console.log('checking convert options 22] ', this._convertOptions)
       return {
-        _convertOptions: [
-          {
-            value: 'test2',
-            label: 'test2',
-          }
-        ],
-        selectedOptions: [],
+        selectedOption: ['images', 'jpg'],
       }
     },
     methods: {
       handleChange() {
         console.log('handling change! ');
-      }
+      },
+      getPrettySize: (size) => bytes(size)
     },
   }
 </script>

@@ -12,7 +12,7 @@ RUN apt-get install -y \
     graphicsmagick \
     imagemagick > /dev/null
 
-RUN npm install -g --silent html-pdf babel-watch
+RUN npm install -g html-pdf
 
 # Install Baseline
 COPY ./scripts/baseline/package.json $CORE
