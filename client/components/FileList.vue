@@ -20,6 +20,9 @@
     width: 40%;
     padding: 10px;
   }
+  .preview-icon {
+    margin-right: 5px;
+  }
   .center {
     width: 20%;
     padding: 10px;
@@ -40,6 +43,10 @@
   .file-size {
     margin-left: 5px;
   }
+  .controls {
+    flex-grow: 1;
+    text-align: right;
+  }
 </style>
 
 <template>
@@ -47,7 +54,24 @@
     <div class="file-entry"
          v-for="file in this.files">
       <div class="left">
-        <div>{{ file.name }}</div>
+        <div>
+          <span v-if="getTypeIcon(file.type) === 'image'"
+                class="preview-icon"
+          >
+            <icon type="file-image-o"></icon>
+          </span>
+          <span v-else-if="getTypeIcon(file.type) === 'document'"
+                class="preview-icon"
+          >
+            <icon type="file-pdf-o"></icon>
+          </span>
+          <span v-else
+                class="preview-icon"
+          >
+            <icon type="file-o"></icon>
+          </span>
+          <span>{{ file.name }}</span>
+        </div>
       </div>
       <div class="center">
         <el-cascader v-bind:options="[
@@ -76,13 +100,16 @@
       <div class="right">
         <div class="status--ready">ready</div>
         <div class="file-size">{{ getPrettySize(file.size) }}</div>
+        <div class="controls"><icon type="times"></icon></div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+  import R from 'ramda'
   import bytes from 'bytes'
+  import Icon from 'components/Icon'
   import El from 'element-ui'
   export default {
     props: {
@@ -91,6 +118,7 @@
     },
     components: {
       El,
+      Icon,
     },
     data: () => {
       return {
@@ -98,10 +126,29 @@
       }
     },
     methods: {
+      /**
+       * Handle change
+       */
       handleChange() {
         console.log('handling change! ');
       },
-      getPrettySize: (size) => bytes(size)
+      /**
+       * Get humanreadable file size
+       * @param size
+       */
+      getPrettySize: (size) => bytes(size),
+      /**
+       * get icon type
+       * @param type
+       */
+      getTypeIcon(type) {
+        if (R.test(/image/g, type)) {
+          return 'image'
+        } else if (R.test(/document/g, type)) {
+          return 'document'
+        }
+        return 'default'
+      }
     },
   }
 </script>
